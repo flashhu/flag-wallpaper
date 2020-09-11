@@ -1,9 +1,23 @@
 import React from 'react'
+import Toggle from 'react-toggle'
+import moon from '../../assets/moon.png'
+import sun from '../../assets/sun.png'
+import 'react-toggle/style.css'
+import './index.less'
 
 function ToolBar(props) {
+    const { isDark, changeMode } = props
+
     return (
         <div className="tool-wrap">
-            <button>test</button>
+            <Toggle
+                defaultChecked={isDark}
+                onChange={changeMode} 
+                icons={{
+                    checked: <img src={moon} className='toggle-item' alt='moon' />,
+                    unchecked: <img src={sun} className='toggle-item' alt='sun' />,
+                }}
+            />
         </div>
     )
 }

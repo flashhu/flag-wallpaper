@@ -5,7 +5,7 @@ import ToolBar from './components/ToolBar';
 import './style.less'
 
 function App() {
-  const [isDark, setIsDark ] = useState(true)
+  const [isDark, setIsDark ] = useState(false)
 
   useEffect(()=>{
     // 设备像素可见宽
@@ -19,11 +19,18 @@ function App() {
     }
   }, [])
 
+  const changeMode = (e) => {
+    setIsDark(e.target.checked);
+  }
+
   return (
     <div className="app-wrap">
       <h1>Flag壁纸生成器</h1>
       <div id="wp" className={isDark ? 'wp-wrap dark' : 'wp-wrap light'}>
-        <ToolBar />
+        <ToolBar 
+          isDark={isDark}
+          changeMode={changeMode}
+        />
         <List />
         <ButtonBars />
       </div>
