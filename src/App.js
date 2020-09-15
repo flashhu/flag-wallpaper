@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ButtonBars from './components/ButtonBar';
-import List from './components/List';
+import FlagList from './components/FlagList';
 import ToolBar from './components/ToolBar';
 import './style.less'
 
@@ -31,7 +31,10 @@ function App() {
           isDark={isDark}
           changeMode={changeMode}
         />
-        <List />
+        <FlagList 
+          isDark={isDark}
+          className="test"
+        />
         <ButtonBars />
       </div>
     </div>
