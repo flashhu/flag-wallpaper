@@ -9,22 +9,23 @@ const { List, useForm } = Form;
 
 function FlagForm(props) {
     const [form] = useForm();
-    const { mode } = props;
+    const { initialContent, changeContent } = props;
 
     useEffect(() => {
         form.setFieldsValue({
-            flags: ['🚩 14天习惯养成计划', '🏆 吃大餐！', '1. 早睡早起~', '2. 运动半小时✧'],
+            flags: initialContent,
         });
+        // eslint-disable-next-line
     }, [form])
 
     return (
         <Form
             className="form-wrap"
-            mode={mode}
             form={form}
             onValuesChange={(_,values) => {
                 // console.log('values:', values);
-                // console.log('getFields:', form.getFieldsValue());
+                // console.log('getFields:', form.getFieldsValue().flags);
+                changeContent(form.getFieldsValue().flags)
             }}
         >
             <List 
