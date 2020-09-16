@@ -1,0 +1,40 @@
+@import '../../assets/variables.less';
+
+.msg-wrapper {
+    position: absolute;
+    top: 24px;
+    padding: 7px 20px 7px 10px;
+    border-radius: 3px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    border: 1px solid #fff;
+    width: auto;
+    line-height: 1.5;
+    z-index: 1;
+
+    &[type='info'] {
+        border: 1px solid @msg-info-bdr;
+        background-color: @msg-info-bg;
+    }
+
+    &[type='success'] {
+        border: 1px solid @msg-success-bdr;
+        background-color: @msg-success-bg;
+    }
+
+    &[type='warn'] {
+        border: 1px solid @msg-warn-bdr;
+        background-color: @msg-warn-bg;
+    }
+
+    &[type='error'] {
+        border: 1px solid @msg-error-bdr;
+        background-color: @msg-error-bg;
+    }
+
+    // 平板 或 手机
+    @media screen and (max-width: 768px){
+        top: 95px;
+        margin: 0 10px;
+    }
+}

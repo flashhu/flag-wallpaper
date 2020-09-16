@@ -1,7 +1,7 @@
 import React from 'react'
 import Toggle from 'react-toggle'
-import moon from '../../assets/moon.png'
-import sun from '../../assets/sun.png'
+import moon from '../../assets/icon/moon.png'
+import sun from '../../assets/icon/sun.png'
 import 'react-toggle/style.css'
 import './index.less'
 

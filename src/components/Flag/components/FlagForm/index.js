@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import Form from 'rc-field-form'
 import Input from './Input'
 import LabelField from './LabelField'
-import del from '../../../../assets/del.svg'
+import del from '../../../../assets/icon/del.svg'
 import './index.less'
 
 const { List, useForm } = Form;
