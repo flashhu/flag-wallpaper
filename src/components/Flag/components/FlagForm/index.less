@@ -1,0 +1,58 @@
+@import '../../../../assets/variables.less';
+
+.form-wrap {
+    & input {
+        border: 1px solid @input-bdr;
+        border-radius: 5px;
+        font-size: 15px;
+        padding: 4px 11px;
+        margin: 5px 0;
+    }
+
+    &[mode='dark'] {
+        & input {
+            background-color: @dark-input-bg;
+            color: @dark-text;
+        }
+
+        .form-add {
+            color: @dark-hollow-btn-text;
+        }
+    }
+
+    &[mode='light'] {
+        & input {
+            background-color: @light-input-bg;
+            color: @light-text;
+        }
+
+        .form-add {
+            color: @light-hollow-btn-text;
+        }
+    }
+
+    .form-item {
+        display: flex;
+        align-items: center;
+    }
+
+    .form-del {
+        height: 18px;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+
+    .form-add {
+        width: 176px;
+        border: 1px dashed @input-bdr;
+        border-radius: 5px;
+        margin: 5px 0;
+        padding: 4px 11px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .form-add:hover {
+        border: 1px dashed @active;
+    }
+}

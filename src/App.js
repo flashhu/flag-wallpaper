@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import ButtonBars from './components/ButtonBar';
-import FlagList from './components/FlagList';
+import Flag from './components/Flag';
 import ToolBar from './components/ToolBar';
 import './style.less'
 
 function App() {
-  const [isDark, setIsDark ] = useState(false)
+  const [isDark, setIsDark ] = useState(false);
+  const [isEdit, setIsEdit] = useState(true);
 
   useEffect(()=>{
     // 设备像素可见宽
@@ -23,6 +24,15 @@ function App() {
     setIsDark(e.target.checked);
   }
 
+  const changeEditStatus = () => {
+    setIsEdit(!isEdit);
+  }
+
+  const downloadPic = () => {
+    setIsEdit(false);
+    console.log('download');
+  }
+
   return (
     <div className="app-wrap">
       <h1>Flag壁纸生成器</h1>
@@ -31,11 +41,15 @@ function App() {
           isDark={isDark}
           changeMode={changeMode}
         />
-        <FlagList 
+        <Flag 
           isDark={isDark}
-          className="test"
+          isEdit={isEdit}
         />
-        <ButtonBars />
+        <ButtonBars 
+          isEdit={isEdit}
+          changeEditStatus={changeEditStatus}
+          downloadPic={downloadPic}
+        />
       </div>
     </div>
   );

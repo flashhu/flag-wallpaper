@@ -1,4 +1,24 @@
+@import '../../assets/variables.less';
+
 .btns-wrap {
     position: absolute;
     bottom: 10%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    .btn {
+        border: none;
+        border-radius: 5px;
+        background-color: @btn-bg;
+        color: #fff;
+        width: 100px;
+        padding: 4px 11px;
+        font-size: 15px;
+        margin: 0 10px;
+    }
+
+    .btn:hover {
+        background-color: @btn-active;
+    }
 }
