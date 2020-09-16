@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import html2Canvas from 'html2canvas';
 import ButtonBars from './components/ButtonBar';
 import Flag from './components/Flag';
 import ToolBar from './components/ToolBar';
@@ -30,13 +31,26 @@ function App() {
 
   const downloadPic = () => {
     setIsEdit(false);
-    console.log('download');
+    const flag = document.getElementById('flag');
+
+    setTimeout(() => {
+      html2Canvas(flag).then((canvas) => {
+        const dataUrl = canvas.toDataURL('image/jpeg', 1);
+        const link = document.createElement('a');
+        link.download = `flag.jpeg`;
+        link.href = dataUrl;
+        link.click();
+      }).catch(() => {
+        console.log('生成图片失败请重试！');
+      });
+    }, 1000);
+    
   }
 
   return (
     <div className="app-wrap">
       <h1>Flag壁纸生成器</h1>
-      <div id="wp" className={isDark ? 'wp-wrap dark' : 'wp-wrap light'}>
+      <div id="wp" className='wp-wrap'>
         <ToolBar 
           isDark={isDark}
           changeMode={changeMode}

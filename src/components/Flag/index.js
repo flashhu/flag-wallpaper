@@ -14,6 +14,7 @@ function Flag(props) {
 
     return (
         <div 
+            id='flag'
             className='flag-wrap' 
             mode={mode}
         >
