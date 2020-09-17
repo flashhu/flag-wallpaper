@@ -10,7 +10,7 @@ body {
     max-width: 22rem;
 
     // 平板 或 手机
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 850px){
         max-width: 100vw;
     }
 }
@@ -21,15 +21,35 @@ body {
     height: 39rem;
     box-shadow: 0 0 15px 1px #aaa;
 
-    // 平板
-    @media screen and (max-width: 768px){
+    // 平板 或 手机
+    @media screen and (max-width: 850px){
         height: 100vh;
         box-shadow: none;
     }
     
-    // 手机
-    @media screen and (max-width: 375px){
-        height: 100vh;
-        box-shadow: none;
+    .tip-wrap {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1;
+    }
+
+    .tip-box {
+        width: 130px;
+        padding: 4px 11px;
+        background: @msg-info-bdr;
+        color: @light-text;
+        position: relative;
+        border-radius: 10px;
+    }
+
+    .tip-box:after {
+        content: "";
+        position: absolute;
+        left: 80%;
+        top: -7px;
+        border-right: 8px solid transparent;
+        border-bottom: 10px solid @msg-info-bdr;
+        border-left: 8px solid transparent;
     }
 }

@@ -4,28 +4,8 @@ import ButtonBars from './components/ButtonBar';
 import Flag from './components/Flag';
 import ToolBar from './components/ToolBar';
 import Message from './components/Message';
+import { easeout, isWxOrQq } from './util'
 import './style.less'
-
-// 缓动
-const easeout = (start = 0, end = 0, rate = 3, callback) => {
-  console.log(start, end);
-  if(start === end || typeof start !== 'number') {
-    return;
-  }
-
-  const step = () => {
-    start = start + (end - start) / rate;
-
-    if (Math.abs(start - end) < 1) {
-      callback(end, true);
-      return;
-    }
-    callback(start, false);
-    requestAnimationFrame(step);
-  }
-
-  step();
-}
 
 function App() {
   const [isDark, setIsDark ] = useState(false);
@@ -35,11 +15,14 @@ function App() {
   const successMsg = { type: 'success', content: 'Flag立下是要拔的哦 ( • ̀ω•́ )✧' };
   const errorMsg = { type: 'error', content: '生成图片失败，请重试 T^T' };
 
+  // 如通过微信或QQ打开网页，需要选择通过浏览器打开
+  const showTipBox = isWxOrQq();
+
   useEffect(()=>{
     // 设备像素可见宽
     const screenWidth = document.documentElement.clientWidth;
     // 非网页
-    if (screenWidth <= 768) {
+    if (screenWidth <= 850) {
       // 取壁纸框离顶部的高度
       const wp = document.getElementsByClassName('wp-wrap')[0]
       const initialHeight = wp.offsetHeight;
@@ -89,6 +72,10 @@ function App() {
       <h1>Flag壁纸生成器</h1>
       {!!msg && <Message type={msg.type}>{msg.content}</Message>}
       <div id="wp" className='wp-wrap'>
+        {showTipBox &&
+          <div className="tip-wrap">
+            <div className="tip-box">请点击右上角选择 “浏览器中打开”</div>
+          </div>}
         <ToolBar 
           isDark={isDark}
           changeMode={changeMode}
