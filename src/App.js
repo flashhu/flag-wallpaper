@@ -6,6 +6,27 @@ import ToolBar from './components/ToolBar';
 import Message from './components/Message';
 import './style.less'
 
+// 缓动
+const easeout = (start = 0, end = 0, rate = 3, callback) => {
+  console.log(start, end);
+  if(start === end || typeof start !== 'number') {
+    return;
+  }
+
+  const step = () => {
+    start = start + (end - start) / rate;
+
+    if (Math.abs(start - end) < 1) {
+      callback(end, true);
+      return;
+    }
+    callback(start, false);
+    requestAnimationFrame(step);
+  }
+
+  step();
+}
+
 function App() {
   const [isDark, setIsDark ] = useState(false);
   const [isEdit, setIsEdit] = useState(true);
@@ -22,7 +43,9 @@ function App() {
       // 取壁纸框离顶部的高度
       const wp = document.getElementsByClassName('wp-wrap')[0]
       const initialHeight = wp.offsetHeight;
-      window.scrollTo(0, initialHeight);
+      easeout(0, initialHeight, 8, (value) => {
+        window.scrollTo(0, value);
+      })
     }
   }, [])
 
