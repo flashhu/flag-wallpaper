@@ -16,20 +16,6 @@ export const easeout = (start = 0, end = 0, rate = 3, callback) => {
     }
 
     step();
-}
-
-// 判断是否通过微信/QQ打开网页
-export const isWxOrQq = () => {
-    const ua = navigator.userAgent.toLowerCase();
-    if (ua.match(/MicroMessenger/i) == "micromessenger") {
-        // 微信打开
-        return true;
-    } else if (ua.match(/QQ/i) == "qq") {
-        // QQ打开
-        return true;
-    } else {
-        return false;
-    }
 } 
 
 // 判断是否用 IE 打开
@@ -43,13 +29,9 @@ export const isIE = () => {
 
 // 判断登录的设备
 export const getEquipType = () => {
-    const plat = navigator.platform.toLowerCase();
-    let type = 'mobile';
-    if(plat.indexOf('win') === 0) {
-        type = 'pc';
-    }
-    if (plat.indexOf('mac') === 0) {
-        type = 'pc';
+    let type = 'pc';
+    if ("ontouchstart" in window || navigator.msMaxTouchPoints) {
+        type = 'mobile';
     }
     return type;
 }

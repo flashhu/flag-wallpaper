@@ -4,7 +4,7 @@ import ButtonBars from './components/ButtonBar';
 import Flag from './components/Flag';
 import ToolBar from './components/ToolBar';
 import Message from './components/Message';
-import { isWxOrQq, isIE, getEquipType, download } from './util'
+import { isIE, getEquipType, download } from './util'
 import './style.less'
 
 function App() {
@@ -14,11 +14,9 @@ function App() {
   const [mobileSave, setMobileSave] = useState('');
 
   const successMsgPC = { type: 'success', content: 'Flag立下是要拔的哦 ( • ̀ω•́ )✧' };
-  const successMsgMB = { type: 'success', content: '趁它不注意点击图片收了它！' };
+  const successMsgMB = { type: 'success', content: '趁它不注意长按保存图片收了它！' };
   const errorMsg = { type: 'error', content: '生成图片失败，请重试或更换浏览器 T^T' };
 
-  // 如通过微信或QQ打开网页，需要选择通过浏览器打开
-  // const showTipBox = isWxOrQq();
   // 设备类型
   const equipType = getEquipType();
 
@@ -40,7 +38,7 @@ function App() {
   const hideMask = () => {
     setTimeout(() => {
       setMobileSave('');
-    }, 15000);
+    }, 8000);
   }
 
   const downloadPic = (dataUrl) => {
@@ -58,15 +56,21 @@ function App() {
       }
       setMsg(successMsgPC);
     }
-
   }
 
   const handleClickSave = () => {
     setIsEdit(false);
     const flag = document.getElementById('flag');
+    const y = equipType === 'pc' ? flag.getBoundingClientRect().top : document.documentElement.scrollTop || document.body.scrollTop;
 
     setTimeout(() => {
-      html2Canvas(flag).then((canvas) => {
+      html2Canvas(flag, {
+        height: flag.clientHeight,
+        width: flag.clientWidth,
+        windowWidth: document.body.scrollWidth,
+        windowHeight: document.body.scrollHeight,
+        y: y
+      }).then((canvas) => {
         const dataUrl = canvas.toDataURL('image/jpeg', 1);
         downloadPic(dataUrl);
         hideMsg();
@@ -79,14 +83,10 @@ function App() {
   }
 
   return (
-    <div className="app-wrap">
+    <div className="app-wrap" plat={equipType}>
       {equipType === 'pc' && <h1>Flag壁纸生成器</h1>}
       {!!msg && <Message type={msg.type}>{msg.content}</Message>}
       <div id="wp" className='wp-wrap'>
-        {/* {showTipBox &&
-          <div className="tip-wrap">
-            <div className="tip-box">请点击右上角选择 “浏览器中打开”</div>
-          </div>} */}
         <ToolBar 
           isDark={isDark}
           changeMode={changeMode}
