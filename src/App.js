@@ -38,7 +38,7 @@ function App() {
   const hideMask = () => {
     setTimeout(() => {
       setMobileSave('');
-    }, 8000);
+    }, 5000);
   }
 
   const downloadPic = (dataUrl) => {
@@ -80,6 +80,7 @@ function App() {
       });
     }, 1000);
 
+    document.getElementById('save').blur();
   }
 
   return (
