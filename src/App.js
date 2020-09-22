@@ -12,6 +12,7 @@ function App() {
   const [isEdit, setIsEdit] = useState(true);
   const [msg, setMsg] = useState(null);
   const [mobileSave, setMobileSave] = useState('');
+  const [showSetBox, setShowSetBox] = useState(false);
 
   const successMsgPC = { type: 'success', content: 'Flag立下是要拔的哦 ( • ̀ω•́ )✧' };
   const successMsgMB = { type: 'success', content: '趁它不注意长按保存图片收了它！' };
@@ -20,12 +21,16 @@ function App() {
   // 设备类型
   const equipType = getEquipType();
 
-  const changeMode = (e) => {
-    setIsDark(e.target.checked);
+  const changeMode = (mode) => {
+    setIsDark(mode);
   }
 
   const changeEditStatus = () => {
     setIsEdit(!isEdit);
+  }
+
+  const changeSettingStatus = () => {
+    setShowSetBox(!showSetBox);
   }
 
   const hideMsg = () => {
@@ -91,6 +96,8 @@ function App() {
         <ToolBar 
           isDark={isDark}
           changeMode={changeMode}
+          showSetBox={showSetBox}
+          changeSettingStatus={changeSettingStatus}
         />
         <Flag 
           isDark={isDark}

@@ -1,23 +1,61 @@
+@import '../../assets//variables.less';
+
 .tool-wrap {
     position: absolute;
     top: 0;
     right: 0;
-    padding: 10px 15px;
+    padding: 10px;
 
-    .react-toggle--checked:hover:not(.react-toggle--disabled) .react-toggle-track,
-    .react-toggle--checked .react-toggle-track {
-        background-color: #000;
+    .tool-icon {
+        height: 25px;
+        cursor: pointer;
     }
+}
 
-    .react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track,
-    .react-toggle .react-toggle-track {
-        background-color: rgba(0, 0, 0, .6);
-    }
+.tool-box {
+    position: absolute;
+    bottom: 0;
+    padding: 10px 0;
+    background-color: rgb(253, 253, 253, 0.6);
+    z-index: 2;
+    min-height: 160px;
+    border-radius: 8px 8px 0 0;
+    width: 100%;
 
-    .toggle-item {
-        width: 16px;
-        height: 16px;
-        pointer-events: none;
-        margin-top: -2px;
+    .tool-picker {
+        margin: 0 20px;
+        padding: 15px 0;
+        border-bottom: 1px solid #eee;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        .tool-title {
+            color: @title;
+            margin-right: 20px;
+        }
+
+        .tool-option {
+            color: @option-text;
+            border: 1px solid @option-bd;
+            background-color: #fff;
+            border-radius: 3px;
+            margin-right: 10px;
+            outline: none;
+        }
+
+        .tool-option.active {
+            background-color: @option-bd;
+        }
     }
+}
+
+.inner {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
 }

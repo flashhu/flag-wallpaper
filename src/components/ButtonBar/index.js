@@ -18,4 +18,4 @@ function ButtonBars(props) {
     )
 }
 
-export default ButtonBars;
+export default React.memo(ButtonBars);
