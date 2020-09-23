@@ -13,6 +13,7 @@ function App() {
   const [msg, setMsg] = useState(null);
   const [mobileSave, setMobileSave] = useState('');
   const [showSetBox, setShowSetBox] = useState(false);
+  const [fonSize, setFonSize] = useState('small');
 
   const successMsgPC = { type: 'success', content: 'Flag立下是要拔的哦 ( • ̀ω•́ )✧' };
   const successMsgMB = { type: 'success', content: '趁它不注意长按保存图片收了它！' };
@@ -31,6 +32,10 @@ function App() {
 
   const changeSettingStatus = () => {
     setShowSetBox(!showSetBox);
+  }
+
+  const changeFonSize = (type) => {
+    setFonSize(type);
   }
 
   const hideMsg = () => {
@@ -84,8 +89,6 @@ function App() {
         hideMsg();
       });
     }, 1000);
-
-    document.getElementById('save').blur();
   }
 
   return (
@@ -98,10 +101,13 @@ function App() {
           changeMode={changeMode}
           showSetBox={showSetBox}
           changeSettingStatus={changeSettingStatus}
+          fonSize={fonSize}
+          changeFonSize={changeFonSize}
         />
         <Flag 
           isDark={isDark}
           isEdit={isEdit}
+          fonSize={fonSize}
         />
         <ButtonBars 
           isEdit={isEdit}

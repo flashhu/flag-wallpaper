@@ -12,8 +12,10 @@ function ButtonBars(props) {
 
     return (
         <div className="btns-wrap">
-            <Button onClick={changeEditStatus}>{isEdit ? '预览' : '修改'}</Button>
-            <Button id='save' onClick={downloadPic}>保存</Button>
+            <div className="btns-box">
+                <Button onClick={changeEditStatus}>{isEdit ? '预览' : '修改'}</Button>
+                <Button onClick={downloadPic}>保存</Button>
+            </div>
         </div>
     )
 }

@@ -4,7 +4,7 @@ import './index.less'
 
 function Flag(props) {
     const initialContent = ['🚩 14天习惯养成计划', '🏆 吃大餐！', '1. 早睡早起~', '2. 运动半小时✧']
-    const { isDark, isEdit } = props;
+    const { isDark, isEdit, fonSize } = props;
     const [content, setContent] = useState(initialContent);
     const mode = isDark ? 'dark' : 'light';
 
@@ -17,6 +17,7 @@ function Flag(props) {
             id='flag'
             className='flag-wrap' 
             mode={mode}
+            fonsize={fonSize}
         >
             {
                 isEdit

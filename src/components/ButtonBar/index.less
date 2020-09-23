@@ -1,21 +1,26 @@
 @import '../../assets/variables.less';
 
 .btns-wrap {
-    position: absolute;
-    bottom: 10%;
     display: flex;
     justify-content: center;
+    position: absolute;
+    bottom: 10%;
     width: 100%;
+
+    .btns-box {
+        display: flex;
+        justify-content: space-between;
+        width: 246px;
+    }
 
     .btn {
         border: none;
         border-radius: 5px;
         background-color: @btn-bg;
         color: #fff;
-        width: 100px;
+        width: 106px;
         padding: 4px 11px;
         font-size: 15px;
-        margin: 0 10px;
     }
 
     .btn:hover {

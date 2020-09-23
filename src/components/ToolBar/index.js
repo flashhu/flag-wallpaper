@@ -21,14 +21,27 @@ const ThemePicker = ({ isDark, changeMode }) => (
     </div>
 )
 
-const FontSizePicker = () => (
-    <div className="tool-picker">
-        <span className="tool-title">字号</span>
-        <button className="tool-option">A-</button>
-        <span>16 </span>
-        <button className="tool-option">A+</button>
-    </div>
-)
+const FontSizePicker = ({ fonSize, changeFonSize }) => {
+    const sizeType = [
+        { name: '小号', type: 'small'},
+        { name: '中号', type: 'medium' },
+        { name: '大号', type: 'big' },
+        { name: '特大', type: 'huge' }
+    ];
+    return(
+        <div className="tool-picker">
+            <span className="tool-title">字号</span>
+            {sizeType.map(item => (
+                <button
+                    className={fonSize === item.type ? "tool-option active" : "tool-option"}
+                    onClick={() => changeFonSize(item.type)}
+                >
+                    {item.name}
+                </button>
+            ))}
+        </div>
+    )
+}
 
 const BackGroundPicker = () => (
     <div className="tool-picker">
@@ -43,7 +56,9 @@ function ToolBar(props) {
         isDark, 
         changeMode, 
         showSetBox, 
-        changeSettingStatus 
+        changeSettingStatus,
+        fonSize, 
+        changeFonSize
     } = props;
 
     return (
@@ -59,7 +74,7 @@ function ToolBar(props) {
             {showSetBox && 
             <div className="tool-box">
                 <ThemePicker isDark={isDark} changeMode={changeMode}/>
-                <FontSizePicker />
+                <FontSizePicker fonSize={fonSize} changeFonSize={changeFonSize}/>
                 <BackGroundPicker />
             </div>}
             {/* 遮罩 */}
