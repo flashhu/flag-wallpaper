@@ -33,6 +33,7 @@ const FontSizePicker = ({ fonSize, changeFonSize }) => {
             <span className="tool-title">字号</span>
             {sizeType.map(item => (
                 <button
+                    key={item.type}
                     className={fonSize === item.type ? "tool-option active" : "tool-option"}
                     onClick={() => changeFonSize(item.type)}
                 >
@@ -43,11 +44,28 @@ const FontSizePicker = ({ fonSize, changeFonSize }) => {
     )
 }
 
-const BackGroundPicker = () => (
+const BackGroundPicker = ({ image, getDefaultBg, customizeBg }) => (
     <div className="tool-picker">
         <span className="tool-title">背景</span>
-        <button className="tool-option active">默认</button>
-        <button className="tool-option">自定义</button>
+        <button 
+            className={!!image ? "tool-option" :"tool-option active"}
+            onClick={() => getDefaultBg()}
+        >
+            默认
+        </button>
+        <button 
+            className={!!image ? "tool-option active" : "tool-option"}
+            onClick={() => { document.getElementById('tool-bg-input').click() }}
+        >
+            自定义
+        </button>
+        <input
+            id="tool-bg-input"
+            style={{display: 'none'}}
+            type='file'
+            accept="image/jpg, image/jpeg, image/png"
+            onChange={customizeBg.bind(this)}
+        />
     </div>
 )
 
@@ -58,7 +76,10 @@ function ToolBar(props) {
         showSetBox, 
         changeSettingStatus,
         fonSize, 
-        changeFonSize
+        changeFonSize,
+        customizeBg,
+        getDefaultBg,
+        image
     } = props;
 
     return (
@@ -75,7 +96,7 @@ function ToolBar(props) {
             <div className="tool-box">
                 <ThemePicker isDark={isDark} changeMode={changeMode}/>
                 <FontSizePicker fonSize={fonSize} changeFonSize={changeFonSize}/>
-                <BackGroundPicker />
+                <BackGroundPicker image={image} getDefaultBg={getDefaultBg} customizeBg={customizeBg}/>
             </div>}
             {/* 遮罩 */}
             {showSetBox && <div className="inner" onClick={changeSettingStatus}></div>}
