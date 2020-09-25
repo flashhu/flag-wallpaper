@@ -7,6 +7,7 @@ import plus from '../../../../assets/icon/plus.svg'
 import './index.less'
 
 const { List, useForm } = Form;
+const MAX_FIELD = 7;
 
 function FlagForm(props) {
     const [form] = useForm();
@@ -35,7 +36,8 @@ function FlagForm(props) {
                     {
                         message: '不要贪多哦~',
                         validator: async(_, value) => {
-                            if (value.length > 6) {
+                            if (value.length > MAX_FIELD - 1) {
+                                console.log('error');
                                 throw new Error();
                             }
                         }
@@ -58,7 +60,7 @@ function FlagForm(props) {
                                     {control => (
                                         <div className="form-item">
                                             <Input {...control} />
-                                            {!errors.length &&
+                                            {!errors.length && fields.length < MAX_FIELD &&
                                             <img
                                                 className="form-icon"
                                                 alt='plus'
@@ -77,7 +79,7 @@ function FlagForm(props) {
                             ))}
                             {/* 出现 Error => item数量达到上限 */}
                             {
-                                !errors.length && 
+                                !errors.length && fields.length < MAX_FIELD &&
                                 <div
                                     className="form-add"
                                     onClick={() => { add(); }}
