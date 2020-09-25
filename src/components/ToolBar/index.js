@@ -44,17 +44,17 @@ const FontSizePicker = ({ fonSize, changeFonSize }) => {
     )
 }
 
-const BackGroundPicker = ({ image, getDefaultBg, customizeBg }) => (
+const BackGroundPicker = ({ isDfImage, getDefaultBg, customizeBg }) => (
     <div className="tool-picker">
         <span className="tool-title">背景</span>
         <button 
-            className={!!image ? "tool-option" :"tool-option active"}
+            className={isDfImage ? "tool-option active" :"tool-option"}
             onClick={() => getDefaultBg()}
         >
             默认
         </button>
         <button 
-            className={!!image ? "tool-option active" : "tool-option"}
+            className={isDfImage ? "tool-option" : "tool-option active"}
             onClick={() => { document.getElementById('tool-bg-input').click() }}
         >
             自选
@@ -99,7 +99,7 @@ function ToolBar(props) {
         changeFonSize,
         customizeBg,
         getDefaultBg,
-        image,
+        isDfImage,
         boxBg,
         changeBoxBg
     } = props;
@@ -118,7 +118,7 @@ function ToolBar(props) {
             <div className="tool-box">
                 <ThemePicker isDark={isDark} changeMode={changeMode} />
                 <FontSizePicker fonSize={fonSize} changeFonSize={changeFonSize} />
-                <BackGroundPicker image={image} getDefaultBg={getDefaultBg} customizeBg={customizeBg} />
+                <BackGroundPicker isDfImage={isDfImage} getDefaultBg={getDefaultBg} customizeBg={customizeBg} />
                 <BoxBgPicker boxBg={boxBg} changeBoxBg={changeBoxBg} />
             </div>}
             {/* 遮罩 */}

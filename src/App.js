@@ -14,7 +14,7 @@ function App() {
   const [mobileSave, setMobileSave] = useState('');
   const [showSetBox, setShowSetBox] = useState(false);
   const [fonSize, setFonSize] = useState('small');
-  const [image, setImage] = useState('');
+  const [isDfImage, setIsDfImage] = useState(true);
   const [boxBg, setBoxBg] = useState('default');
 
   const successMsgPC = { type: 'success', content: 'Flag立下是要拔的哦 ( • ̀ω•́ )✧' };
@@ -48,14 +48,20 @@ function App() {
   }
 
   const getDefaultBg = () => {
-    setImage('');
+    const box = document.getElementById('flag-bg');
+    box.style.backgroundImage = '';
+    setIsDfImage(true);
   }
 
   const customizeBg = (e) => {
     setIsEdit(false);
     const reader = new FileReader();
     reader.onload = () => {
-      setImage(reader.result);
+      const box = document.getElementById('flag-bg');
+      box.style.backgroundImage = `url(${reader.result})`;
+      box.style.backgroundSize = 'cover';
+      box.style.backgroundPosition = 'center';
+      setIsDfImage(false);
     };
     reader.readAsDataURL(e.target.files[0]);
   }
@@ -123,7 +129,6 @@ function App() {
           isEdit={isEdit}
           fonSize={fonSize}
           boxBg={boxBg}
-          image={image}
         />
         <ToolBar
           isDark={isDark}
@@ -132,7 +137,7 @@ function App() {
           changeSettingStatus={changeSettingStatus}
           fonSize={fonSize}
           changeFonSize={changeFonSize}
-          image={image}
+          isDfImage={isDfImage}
           getDefaultBg={getDefaultBg}
           customizeBg={customizeBg}
           boxBg={boxBg}

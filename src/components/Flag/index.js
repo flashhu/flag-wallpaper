@@ -4,7 +4,7 @@ import './index.less'
 
 function Flag(props) {
     const initialContent = ['🚩 14天习惯养成计划', '🏆 吃大餐！', '1. 早睡早起~', '2. 运动半小时✧']
-    const { isDark, isEdit, fonSize, boxBg, image } = props;
+    const { isDark, isEdit, fonSize, boxBg } = props;
     const [content, setContent] = useState(initialContent);
     const mode = isDark ? 'dark' : 'light';
 
@@ -18,14 +18,9 @@ function Flag(props) {
             className='flag-wrap' 
             mode={mode}
             fonsize={fonSize}
-            boxBg={boxBg}
+            boxbg={boxBg}
         >
-            {!!image && 
-            <img
-                src={image}
-                className='flag-bg'
-                alt='bg'
-            />}
+            <div id='flag-bg' className='flag-bg'></div>
             {
                 isEdit
                 ? <FlagForm

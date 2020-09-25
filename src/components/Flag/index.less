@@ -56,8 +56,9 @@
         position: absolute;
         top: 0;
         height: 100%;
-        width: 100%;
-        object-fit: cover;
+        width: 100%;        
+        background-size: cover;
+        // object-fit: cover;
     }
 
     &[mode='dark'] {
@@ -84,15 +85,15 @@
         .fontStyle('huge')
     }
 
-    &[boxBg='narrow'] {
+    &[boxbg='narrow'] {
         .boxBgStyle('narrow')
     }
 
-    &[boxBg='wide'] {
+    &[boxbg='wide'] {
         .boxBgStyle('wide')
     }
 
-    &[boxBg='default'] {
+    &[boxbg='default'] {
         .list-wrap {
             background-color: transparent;
             padding: 0;
