@@ -46,6 +46,7 @@ function App() {
   }
 
   const customizeBg = (e) => {
+    setIsEdit(false);
     const reader = new FileReader();
     reader.onload = () => {
       setImage(reader.result);
