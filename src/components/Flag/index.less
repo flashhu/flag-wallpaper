@@ -4,6 +4,7 @@
     @textColor: "@{theme}-text";
     @bgColor: "@{theme}-bg";
     @inputBgColor: "@{theme}-input-bg";
+    @formBgColor: "@{theme}-form-bg";
     @btnTextColor: "@{theme}-hollow-btn-text";
 
     color: @@textColor;
@@ -17,6 +18,10 @@
     .form-add {
         color: @btnTextColor;
     }
+
+    .list-wrap {
+        background-color: @@formBgColor;
+    }
 }
 
 .fontStyle(@type) {
@@ -29,6 +34,14 @@
     }
 }
 
+.boxBgStyle(@type) {
+    @pad: "@{type}-pad";
+
+    .list-wrap {
+        padding: @@pad;
+    }
+}
+
 .flag-wrap {
     display: flex;
     justify-content: center;
@@ -37,6 +50,14 @@
 
     & p {
        margin: 15px 0; 
+    }
+
+    .flag-bg {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
     }
 
     &[mode='dark'] {
@@ -59,20 +80,30 @@
         .fontStyle('big')
     }
 
-    .flag-bg {
-        position: absolute;
-        top: 0;
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-    }
-
     &[fonsize='huge'] {
         .fontStyle('huge')
+    }
+
+    &[boxBg='narrow'] {
+        .boxBgStyle('narrow')
+    }
+
+    &[boxBg='wide'] {
+        .boxBgStyle('wide')
+    }
+
+    &[boxBg='default'] {
+        .list-wrap {
+            background-color: transparent;
+            padding: 0;
+        }
     }
 }
 
 .list-wrap {
+    display: flex;
+    justify-content: center;
     position: relative;
     z-index: 0;
+    width: 100%;
 }

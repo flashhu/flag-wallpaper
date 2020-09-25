@@ -15,6 +15,7 @@ function App() {
   const [showSetBox, setShowSetBox] = useState(false);
   const [fonSize, setFonSize] = useState('small');
   const [image, setImage] = useState('');
+  const [boxBg, setBoxBg] = useState('default');
 
   const successMsgPC = { type: 'success', content: 'Flag立下是要拔的哦 ( • ̀ω•́ )✧' };
   const successMsgMB = { type: 'success', content: '趁它不注意长按保存图片收了它！' };
@@ -39,6 +40,11 @@ function App() {
   const changeFonSize = (type) => {
     setIsEdit(false);
     setFonSize(type);
+  }
+
+  const changeBoxBg = (type) => {
+    setIsEdit(false);
+    setBoxBg(type);
   }
 
   const getDefaultBg = () => {
@@ -116,6 +122,7 @@ function App() {
           isDark={isDark}
           isEdit={isEdit}
           fonSize={fonSize}
+          boxBg={boxBg}
           image={image}
         />
         <ToolBar
@@ -128,6 +135,8 @@ function App() {
           image={image}
           getDefaultBg={getDefaultBg}
           customizeBg={customizeBg}
+          boxBg={boxBg}
+          changeBoxBg={changeBoxBg}
         />
         <ButtonBars 
           isEdit={isEdit}

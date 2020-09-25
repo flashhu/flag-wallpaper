@@ -57,7 +57,7 @@ const BackGroundPicker = ({ image, getDefaultBg, customizeBg }) => (
             className={!!image ? "tool-option active" : "tool-option"}
             onClick={() => { document.getElementById('tool-bg-input').click() }}
         >
-            自定义
+            自选
         </button>
         <input
             id="tool-bg-input"
@@ -69,6 +69,26 @@ const BackGroundPicker = ({ image, getDefaultBg, customizeBg }) => (
     </div>
 )
 
+const BoxBgPicker = ({ boxBg, changeBoxBg }) => {
+    const boxBgType = [
+        { name: '无底', type: 'default' },
+        { name: '窄边', type: 'narrow' },
+        { name: '宽边', type: 'wide' }
+    ]
+    return (<div className="tool-picker">
+        <span className="tool-title">底色</span>
+        {boxBgType.map(item => (
+            <button
+                key={item.type}
+                className={boxBg === item.type ? "tool-option active" : "tool-option"}
+                onClick={() => changeBoxBg(item.type)}
+            >
+                {item.name}
+            </button>
+        ))}
+    </div>)
+}
+
 function ToolBar(props) {
     const { 
         isDark, 
@@ -79,7 +99,9 @@ function ToolBar(props) {
         changeFonSize,
         customizeBg,
         getDefaultBg,
-        image
+        image,
+        boxBg,
+        changeBoxBg
     } = props;
 
     return (
@@ -94,9 +116,10 @@ function ToolBar(props) {
             </div>
             {showSetBox && 
             <div className="tool-box">
-                <ThemePicker isDark={isDark} changeMode={changeMode}/>
-                <FontSizePicker fonSize={fonSize} changeFonSize={changeFonSize}/>
-                <BackGroundPicker image={image} getDefaultBg={getDefaultBg} customizeBg={customizeBg}/>
+                <ThemePicker isDark={isDark} changeMode={changeMode} />
+                <FontSizePicker fonSize={fonSize} changeFonSize={changeFonSize} />
+                <BackGroundPicker image={image} getDefaultBg={getDefaultBg} customizeBg={customizeBg} />
+                <BoxBgPicker boxBg={boxBg} changeBoxBg={changeBoxBg} />
             </div>}
             {/* 遮罩 */}
             {showSetBox && <div className="inner" onClick={changeSettingStatus}></div>}
