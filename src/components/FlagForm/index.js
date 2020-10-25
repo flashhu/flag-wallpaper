@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import Form from 'rc-field-form'
-import Input from './Input'
-import LabelField from './LabelField'
-import minus from '../../../../assets/icon/minus.svg'
-import plus from '../../../../assets/icon/plus.svg'
+import Input from './components/Input'
+import LabelField from './components/LabelField'
+import drag from '../../assets/icon/drag.svg'
+import del from '../../assets/icon/del.svg'
 import './index.less'
 
 const { List, useForm } = Form;
@@ -45,7 +45,6 @@ function FlagForm(props) {
                 ]}
             >
                 {(fields, {add, remove}, { errors }) => {
-                    // console.log('Demo Fields:', fields, errors);
 
                     return (
                         <>
@@ -59,19 +58,17 @@ function FlagForm(props) {
                                 >
                                     {control => (
                                         <div className="form-item">
-                                            <Input {...control} />
-                                            {!errors.length && fields.length < MAX_FIELD &&
                                             <img
                                                 className="form-icon"
-                                                alt='plus'
-                                                src={plus}
-                                                onClick={() => { add('', index === 0 ? 0: index) }}
-                                            />}
-                                            <img 
+                                                alt='del'
+                                                src={del}
+                                                onClick={() => { remove(index) }}
+                                            />
+                                            <Input {...control} />
+                                            <img
                                                 className="form-icon"
-                                                alt='minus' 
-                                                src={minus} 
-                                                onClick={() => {remove(index)}}
+                                                alt='drag'
+                                                src={drag}
                                             />
                                         </div>
                                     )}

@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import html2Canvas from 'html2canvas';
-import ButtonBars from './components/ButtonBar';
-import Flag from './components/Flag';
-import ToolBar from './components/ToolBar';
-import Message from './components/Message';
+import { ButtonBars, ToolBar, Message, FlagForm, FlagList} from './components';
 import { isIE, getEquipType, download } from './util'
 import './style.less'
 
 function App() {
+  const successMsgPC = { type: 'success', content: 'Flag立下是要拔的哦 ( • ̀ω•́ )✧' };
+  const successMsgMB = { type: 'success', content: '趁它不注意长按保存图片收了它！' };
+  const errorMsg = { type: 'error', content: '生成图片失败，请重试或更换浏览器 T^T' };
+  const initialContent = ['🚩 14天习惯养成计划', '🏆 吃大餐！', '1. 早睡早起~', '2. 运动半小时✧'];
+
   const [isDark, setIsDark ] = useState(false);
   const [isEdit, setIsEdit] = useState(true);
   const [msg, setMsg] = useState(null);
@@ -16,10 +18,7 @@ function App() {
   const [fonSize, setFonSize] = useState('small');
   const [isDfImage, setIsDfImage] = useState(true);
   const [boxBg, setBoxBg] = useState('default');
-
-  const successMsgPC = { type: 'success', content: 'Flag立下是要拔的哦 ( • ̀ω•́ )✧' };
-  const successMsgMB = { type: 'success', content: '趁它不注意长按保存图片收了它！' };
-  const errorMsg = { type: 'error', content: '生成图片失败，请重试或更换浏览器 T^T' };
+  const [content, setContent] = useState(initialContent);
 
   // 设备类型
   const equipType = getEquipType();
@@ -45,6 +44,10 @@ function App() {
   const changeBoxBg = (type) => {
     setIsEdit(false);
     setBoxBg(type);
+  }
+
+  const changeContent = (value) => {
+    setContent(value)
   }
 
   const getDefaultBg = () => {
@@ -124,12 +127,23 @@ function App() {
       {equipType === 'pc' && <h1>Flag壁纸生成器</h1>}
       {!!msg && <Message type={msg.type}>{msg.content}</Message>}
       <div id="wp" className='wp-wrap'>
-        <Flag 
-          isDark={isDark}
-          isEdit={isEdit}
-          fonSize={fonSize}
-          boxBg={boxBg}
-        />
+        <div
+          id='flag'
+          className='flag-wrap'
+          mode={isDark ? 'dark' : 'light'}
+          fonsize={fonSize}
+          boxbg={boxBg}
+        >
+          <div id='flag-bg' className='flag-bg'></div>
+          {
+            isEdit
+              ? <FlagForm
+                initialContent={content}
+                changeContent={changeContent}
+              />
+              : <FlagList data={content} />
+          }
+        </div>
         <ToolBar
           isDark={isDark}
           changeMode={changeMode}

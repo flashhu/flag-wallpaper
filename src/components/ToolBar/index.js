@@ -127,4 +127,4 @@ function ToolBar(props) {
     )
 }
 
-export default ToolBar;
+export default React.memo(ToolBar);

@@ -9,4 +9,4 @@ function Message({children, type}) {
     )
 }
 
-export default Message;
+export default React.memo(Message);

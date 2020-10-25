@@ -14,4 +14,4 @@ function FlagList(props) {
     )
 }
 
-export default FlagList
+export default React.memo(FlagList)
