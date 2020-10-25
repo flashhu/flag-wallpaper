@@ -138,6 +138,7 @@ function App() {
           {
             isEdit
               ? <FlagForm
+                plat={equipType}
                 initialContent={content}
                 changeContent={changeContent}
               />
