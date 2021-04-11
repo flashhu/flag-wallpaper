@@ -6,7 +6,7 @@ import './style.less'
 
 function App() {
   const successMsgPC = { type: 'success', content: 'Flag立下是要拔的哦 ( • ̀ω•́ )✧' };
-  const successMsgMB = { type: 'success', content: '趁它不注意长按保存图片收了它！' };
+  const successMsgMB = { type: 'success', content: '长按保存或截屏一下吧~' };
   const errorMsg = { type: 'error', content: '生成图片失败，请重试或更换浏览器 T^T' };
   const initialContent = ['🚩 14天习惯养成计划', '🏆 吃大餐！', '1. 早睡早起~', '2. 运动半小时✧'];
 
@@ -72,7 +72,7 @@ function App() {
   const hideMsg = () => {
     setTimeout(() => {
       setMsg(null);
-    }, 2500);
+    }, 1500);
   }
 
   // 移动端图片预览遮罩
@@ -120,6 +120,10 @@ function App() {
         hideMsg();
       });
     }, 1000);
+  }
+
+  const getError = () => {
+    throw new Error('test')
   }
 
   return (
@@ -170,6 +174,7 @@ function App() {
             style={{height: '100%', position: 'absolute', top: 0}}
           />}
       </div>
+      <button onClick={getError}>error</button>
     </div>
   );
 }
